@@ -36,8 +36,10 @@ type Die struct {
 	Log   Log
 }
 
-func (d *Die) Roll() int {
-	return rollSingle(d.Sides)
+func (d *Die) Roll() (result int, entry LogEntry) {
+	result = rollSingle(d.Sides)
+	entry = d.Log.addSimpleEntry(result)
+	return result, entry
 }
 
 func (d *Die) RollMany(num int) (result int, entry LogEntry) {
